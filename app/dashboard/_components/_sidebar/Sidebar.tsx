@@ -1,26 +1,52 @@
 import { LuStore, LuTruck, LuUser, LuUsers, LuWheat } from "react-icons/lu";
 import NavItem from "./NavItem";
+import Image from "next/image";
+
+const menuItems = [
+  {
+    icon: LuStore,
+    path: "/dashboard",
+    name: "Dashboard",
+  },
+  {
+    icon: LuTruck,
+    path: "/dashboard/providers",
+    name: "Providers",
+  },
+  {
+    icon: LuWheat,
+    path: "/dashboard/products",
+    name: "Products",
+  },
+  {
+    icon: LuUser,
+    path: "/dashboard/managers",
+    name: "Managers",
+  },
+];
 
 export default function Sidebar() {
   return (
-    <nav className="w-[10vw] h-[90vh] bg-orange-200 flex flex-col items-center py-20 justify-center gap-10">
-      <NavItem icon={<LuStore className="text-4xl" />} path="/dashboard" />
-      <NavItem
-        icon={<LuTruck className="text-4xl" />}
-        path="/dashboard/providers"
-      />
-      <NavItem
-        icon={<LuWheat className="text-4xl" />}
-        path="/dashboard/products"
-      />
-      <NavItem
-        icon={<LuUser className="text-4xl" />}
-        path="/dashboard/managers"
-      />
-      <NavItem
-        icon={<LuUsers className="text-4xl" />}
-        path="/dashboard/employees"
-      />
-    </nav>
+    <div className="bg-primary h-screen px-5">
+      <div className="flex items-center py-5">
+        <Image
+          src="/Oxxo_Logo.svg"
+          width={190}
+          height={50}
+          alt="Ocso Logo"
+          draggable={false}
+        />
+      </div>
+      <nav className="flex flex-col pt-5 justify-center gap-3">
+        {menuItems.map((item) => (
+          <NavItem
+            key={item.name}
+            icon={<item.icon className="text-2xl text-background" />}
+            path={item.path}
+            name={item.name}
+          />
+        ))}
+      </nav>
+    </div>
   );
 }

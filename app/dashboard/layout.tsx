@@ -9,12 +9,16 @@ export default function LayoutDashboard({
   count: React.ReactNode;
 }>) {
   return (
-    <div className="bg-orange-50">
-      <Header />
+    <div>
+      {/*<Header />*/}
       <div className="flex flex-row items-center">
         <Sidebar />
-        {children}
-        {count}
+        <div className="h-screen w-full p-2 bg-primary">
+          <div className="bg-[#f8f8ff] h-full w-full rounded-xl p-4 flex">
+            {children}
+            {count}
+          </div>
+        </div>
       </div>
     </div>
   );
