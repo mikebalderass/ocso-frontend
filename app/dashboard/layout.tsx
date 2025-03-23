@@ -14,7 +14,7 @@ export default function LayoutDashboard({
       <div className="flex flex-row items-center">
         <Sidebar />
         <div className="h-screen w-full p-2 bg-primary">
-          <div className="bg-[#f8f8ff] h-full w-full rounded-xl p-4 flex">
+          <div className="bg-background h-full w-full rounded-xl p-4 flex">
             {children}
             {count}
           </div>
