@@ -12,7 +12,12 @@ const CountPage = async () => {
     },
   });
 
-  return "Hay tantas locations: " + countLocations?.data?.length;
+  const cantidad = countLocations?.data?.length;
+  return (
+    <div>
+      `Hay: ${cantidad} tienda${cantidad > 1 ? "s" : ""}`;
+    </div>
+  );
 };
 
 export default CountPage;
