@@ -19,6 +19,14 @@ export default async function EmployeesLocation({
       },
     },
   );
+
+  if (data.length === 0)
+    return (
+      <div className="ml-5">
+        <p>No hay empleados en esta tienda</p>
+      </div>
+    );
+
   return data?.map((employee) => {
     const fullName = employee.employeeName + " " + employee.employeeLastName;
     return (
