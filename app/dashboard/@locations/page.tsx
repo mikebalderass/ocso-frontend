@@ -5,12 +5,11 @@ import { TOKEN_NAME } from "@/constants";
 import SelectLocation from "./_components/SelectLocation";
 import LocationCard from "./_components/LocationCard";
 
-const LocationsPage = async ({
-  searchParams,
-}: {
-  searchParams: { [key: string]: string | string[] | undefined };
+const LocationsPage = async (props: {
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }) => {
-  const userCookies = cookies();
+  const searchParams = await props.searchParams;
+  const userCookies = await cookies();
   const token = userCookies.get(TOKEN_NAME)?.value;
   let { data } = await axios.get<Location[]>(
     "http://127.0.0.1:4000/locations",
@@ -20,22 +19,13 @@ const LocationsPage = async ({
       },
     },
   );
-  data = [
-    {
-      locationId: 0,
-      locationName: "Ninguna",
-      locationLatLng: [0, 0],
-      locationAddress: "No existe",
-    },
-    ...data,
-  ];
   return (
-    <div className="w-7/12">
-      <div className="w-full flex flex-col items-center h-[90vh]">
-        <div className="w-1/2 my-10">
+    <div className="w-1/2">
+      <div className="w-full flex h-[90vh] gap-6">
+        <div className="w-1/3">
           <SelectLocation locations={data} store={searchParams.store} />
         </div>
-        <div>
+        <div className="w-2/3">
           <LocationCard store={searchParams.store} />
         </div>
       </div>

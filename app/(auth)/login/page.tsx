@@ -1,12 +1,13 @@
 "use client";
 
 import Link from "next/link";
-import { Input, Button, Spinner } from "@nextui-org/react";
 import axios from "axios";
 import { API_URL } from "@/constants";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { sub } from "framer-motion/m";
+import { Label } from "@/components/ui/label";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
 
 export default function LoginPage() {
   const [submitting, setSubmitting] = useState(false);
@@ -14,10 +15,12 @@ export default function LoginPage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setSubmitting(true);
     const formData = new FormData(e.target);
     let authData: any = {};
     authData.userEmail = formData.get("userEmail");
     authData.userPassword = formData.get("userPassword");
+    console.log(authData);
     try {
       const response = await axios.post(
         `${API_URL}/auth/login`,
@@ -37,45 +40,43 @@ export default function LoginPage() {
   };
 
   return (
-    <form
-      className="bg-primary px-5 py-2 rounded-xl w-80"
-      onSubmit={handleSubmit}
-    >
-      <p className="text-2xl my-4 text-white">Iniciar sesión</p>
-      <div className="flex flex-col gap-2 my-4 items-center">
-        <Input
-          label="Email"
-          name="userEmail"
-          type="email"
-          isRequired={true}
-          size="sm"
-          radius="sm"
-        />
-        <Input
-          label="Contraseña"
-          name="userPassword"
-          type="password"
-          isRequired={true}
-          size="sm"
-          radius="sm"
-        />
-      </div>
-      <div className="flex flex-col items-center gap-2">
-        <Button
-          className="w-full text-foreground"
-          color="secondary"
-          type="submit"
-          isLoading={submitting}
-          radius="sm"
-        >
-          {submitting ? "Iniciando sesión..." : "Iniciar Sesión"}
+    <form className="p-6 md:p-8" onSubmit={handleSubmit}>
+      <div className="flex flex-col gap-6">
+        <div className="flex flex-col items-center text-center">
+          <h1 className="text-2xl font-bold">Bienvenido de vuelta</h1>
+          <p className="text-balance text-muted-foreground">
+            Inicia sesión en tu cuenta de Ocso
+          </p>
+        </div>
+        <div className="grid gap-2">
+          <Label htmlFor="userEmail">Correo electrónico</Label>
+          <Input
+            id="userEmail"
+            name="userEmail"
+            type="email"
+            placeholder="correo@ejemplo.com"
+            required
+          />
+        </div>
+        <div className="grid gap-2">
+          <Label htmlFor="userPassword">Contraseña</Label>
+          <Input
+            id="userPassword"
+            name="userPassword"
+            type="password"
+            required
+            placeholder="********"
+          />
+        </div>
+        <Button type="submit" className="w-full" disabled={submitting}>
+          {submitting ? "Iniciando sesión..." : "Iniciar sesión"}
         </Button>
-        <p className="text-white">
-          ¿No tienes cuenta?{" "}
-          <Link href="/signup" className="font-bold underline">
+        <div className="text-center text-sm">
+          ¿Aun no tienes una cuenta?{" "}
+          <Link href="/signup" className="underline underline-offset-4">
             Registrate
           </Link>
-        </p>
+        </div>
       </div>
     </form>
   );
