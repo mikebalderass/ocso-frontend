@@ -1,6 +1,5 @@
-import { CardContent } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
-import { Card } from "@nextui-org/react";
 import Image from "next/image";
 
 export default function AuthLayout({
@@ -22,7 +21,7 @@ export default function AuthLayout({
                 />
               </div>
             </CardContent>
-          </Card>
+          </CardCard>
         </div>
       </div>
     </div>
