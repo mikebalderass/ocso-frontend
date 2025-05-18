@@ -12,13 +12,16 @@ import { Location, Manager } from "@/entities";
 export default function SelectManager({
   managers,
   locations,
+  defaultManager,
 }: {
   managers: Manager[];
   locations: Location[];
+  defaultManager?: string;
 }) {
   const disabledKeys = locations
     .map((location: Location) => {
-      return location.manager?.managerId;
+      if (location.manager?.managerId !== defaultManager)
+        return location.manager?.managerId;
     })
     .filter((managerId) => managerId !== undefined);
 
@@ -27,7 +30,7 @@ export default function SelectManager({
       <SelectTrigger className="w-full">
         <SelectValue placeholder="Selecciona un manager" />
       </SelectTrigger>
-      <SelectContent>
+      <SelectContent defaultValue={defaultManager}>
         {managers.map((manager: Manager) => {
           return (
             <SelectItem

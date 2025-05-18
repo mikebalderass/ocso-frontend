@@ -29,7 +29,7 @@ export default function SelectLocation({
         <div className="w-full flex flex-col gap-2">
           {locations.map((location) => (
             <Button
-              key={location.locationName}
+              key={location.locationId}
               variant={
                 location.locationId.toString() === store ? "default" : "outline"
               }

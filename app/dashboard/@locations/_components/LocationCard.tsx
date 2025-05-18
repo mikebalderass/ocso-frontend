@@ -4,6 +4,7 @@ import { API_URL, TOKEN_NAME } from "@/constants";
 import Link from "next/link";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import DeleteLocationButton from "./DeleteLocationButton";
+import FormUpdateLocation from "./FormUpdateLocation";
 
 export default async function LocationCard({
   store,
@@ -48,6 +49,7 @@ export default async function LocationCard({
                &q=${data.locationLatLng[0]},${data.locationLatLng[1]}`}
         ></iframe>
         <DeleteLocationButton store={store} />
+        <FormUpdateLocation store={store} />
       </CardContent>
     </Card>
   );

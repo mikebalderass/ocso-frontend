@@ -13,8 +13,7 @@ export default function DeleteLocationButton({
         type="submit"
         name="deleteValue"
         value={store}
-        variant="destructive"
-        className="text-white cursor-pointer"
+        className="text-white cursor-pointer w-full"
       >
         Borrar tienda
       </Button>

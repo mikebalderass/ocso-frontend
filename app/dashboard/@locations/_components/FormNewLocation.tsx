@@ -58,13 +58,17 @@ export default async function FormNewLocation({
         </DialogHeader>
         <form action={createLocation}>
           <Label htmlFor="locationName">Nombre</Label>
-          <Input placeholder="Ocso Jurikiya" name="locationName" />
+          <Input placeholder="Ocso Jurikiya" name="locationName" required />
           <Label htmlFor="locationAddress">Descripción</Label>
-          <Input placeholder="Av De La Luz S/N" name="locationAddress" />
+          <Input
+            placeholder="Av De La Luz S/N"
+            name="locationAddress"
+            required
+          />
           <Label htmlFor="locationLat">Latitud</Label>
-          <Input placeholder="-120" name="locationLat" />
+          <Input placeholder="-120" name="locationLat" required />
           <Label htmlFor="locationLng">Longitud</Label>
-          <Input placeholder="20" name="locationLng" />
+          <Input placeholder="20" name="locationLng" required />
           <Label htmlFor="manager">Manager</Label>
           <SelectManager managers={dataManagers} locations={dataLocations} />
           <Button type="submit" className="mt-4 w-full">
