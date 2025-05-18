@@ -23,7 +23,7 @@ export default function SelectLocation({
   };
 
   return (
-    <div>
+    <div className="mb-2">
       <h2 className="text-xl mb-2">Selecciona una locación</h2>
       <ScrollArea className="flex flex-col gap-2 w-full">
         <div className="w-full flex flex-col gap-2">

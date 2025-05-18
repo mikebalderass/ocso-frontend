@@ -1,4 +1,3 @@
-import axios from "axios";
 import { Employee } from "@/entities";
 import { API_URL, TOKEN_NAME } from "@/constants";
 import { cookies } from "next/headers";
@@ -11,16 +10,20 @@ export default async function EmployeesLocation({
 }) {
   if (!store) return "No hay empleados";
   const token = (await cookies()).get(TOKEN_NAME)?.value;
-  const { data } = await axios.get<Employee[]>(
-    `${API_URL}/employees/location/${store}`,
-    {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    },
-  );
 
-  if (data.length === 0)
+  const response = await fetch(`${API_URL}/employees/location/${store}`, {
+    method: "GET",
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+    next: {
+      tags: ["dashboard:locations:employees"],
+    },
+  });
+
+  const data: Employee[] = await response.json();
+
+  if (data.length === 0 || !data)
     return (
       <div className="ml-5">
         <p>No hay empleados en esta tienda</p>

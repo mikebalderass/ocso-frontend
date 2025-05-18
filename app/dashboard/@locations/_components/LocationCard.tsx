@@ -1,9 +1,9 @@
 import { Location } from "@/entities";
-import axios from "axios";
 import { cookies } from "next/headers";
 import { API_URL, TOKEN_NAME } from "@/constants";
 import Link from "next/link";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import DeleteLocationButton from "./DeleteLocationButton";
 
 export default async function LocationCard({
   store,
@@ -11,12 +11,20 @@ export default async function LocationCard({
   store: string | string[] | undefined;
 }) {
   if (!store) return null;
+
   const token = (await cookies()).get(TOKEN_NAME)?.value;
-  const { data } = await axios.get<Location>(`${API_URL}/locations/${store}`, {
+  const response = await fetch(`${API_URL}/locations/${store}`, {
+    method: "GET",
     headers: {
       Authorization: `Bearer ${token}`,
     },
+    next: {
+      tags: ["dashboard:locations", `dashboard:locations:${store}`],
+    },
   });
+
+  const data: Location = await response.json();
+
   return (
     <Card>
       <CardHeader className="pb-2">
@@ -39,6 +47,7 @@ export default async function LocationCard({
           src={`https://www.google.com/maps/embed/v1/place?key=AIzaSyAz0Y6dhhUVleZmt7-H4PO1QQWCSEz3LBg
                &q=${data.locationLatLng[0]},${data.locationLatLng[1]}`}
         ></iframe>
+        <DeleteLocationButton store={store} />
       </CardContent>
     </Card>
   );

@@ -21,7 +21,7 @@ export default function AuthLayout({
                 />
               </div>
             </CardContent>
-          </CardCard>
+          </Card>
         </div>
       </div>
     </div>

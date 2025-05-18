@@ -22,15 +22,11 @@ export default function LoginPage() {
     authData.userPassword = formData.get("userPassword");
     console.log(authData);
     try {
-      const response = await axios.post(
-        `${API_URL}/auth/login`,
-        {
-          ...authData,
-        },
-        {
-          withCredentials: true,
-        },
-      );
+      const response = await fetch(`${API_URL}/auth/login`, {
+        method: "POST",
+        body: JSON.stringify(authData),
+        credentials: "include",
+      });
       if (response.status === 201) router.push("/dashboard");
       setSubmitting(false);
     } catch (e) {
