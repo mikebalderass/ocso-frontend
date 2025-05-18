@@ -34,7 +34,11 @@ export default async function LocationCard({
       <CardContent className="flex flex-col w-full">
         <p className="w-full">
           Manager:{" "}
-          <Link href={{ pathname: `/dashboard/managers` }}>
+          <Link
+            href={{
+              pathname: `/dashboard/managers/${data.manager?.managerId}`,
+            }}
+          >
             <b>{data.manager?.managerFullName}</b>
           </Link>
         </p>
